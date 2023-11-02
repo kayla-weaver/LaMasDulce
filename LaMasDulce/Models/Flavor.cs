@@ -7,6 +7,12 @@ namespace LaMasDulce.Models
     {
       this.JoinEntities = new HashSet<TreatFlavor>();
     }
+    public int FlavorId { get; set; }
+    public string FlavorName { get; set; }
+    public list<Treat> Treats { get; set; }
+
+    public string Name { get; }
     
+    public virtual ICollection<TreatFlavor> JoinEntities { get; set; }
   }
 }
