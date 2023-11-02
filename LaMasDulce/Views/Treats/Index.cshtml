@@ -1,0 +1,27 @@
+@{
+  Layout = "_Layout";
+}
+
+@using LaMasDulce.Models;
+@model List<LaMasDulce.Models.Treat>;
+
+<h1>Treats delicicosas</h1>
+
+<hr />
+
+@if (@Model.Count == 0)
+{
+  <h3>no yummy treats :(</h3>
+}
+
+<ul>
+  @foreach(Treat treat in Model)
+  {
+    <li>@Html.ActionLink($"{treat.Name}", "Details", new {id = treat.TreatId })</li>
+  }
+</ul>
+
+<ul class="menu-links">
+  <li>@Html.ActionLink("add a new treat", "Create")</li>
+  <li>@Html.ActionLink("back to home", "Index", "Home")</li>
+</ul>
