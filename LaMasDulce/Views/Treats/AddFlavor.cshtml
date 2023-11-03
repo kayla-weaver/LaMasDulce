@@ -1,0 +1,29 @@
+@{
+  Layout ="_Layout";
+}
+@model LaMasDulce.Models.Treat;
+<div class="headder">
+  <div class="jumbotron text-center">
+    <h1>La Mas Dulce Control</h1>
+    <h2>Flavors</h2>
+  </div>
+  <nav class="navbar sticky-top navbar-expand-sm">
+    <div class="container">
+      <p class="btn">@Html.ActionLink("Add Flavor", "Create", "Flavors")</p>
+      <p class="btn">@Html.ActionLink("View Treats", "Index", "Treats")</p>
+      <p class="btn">@Html.ActionLink("Home", "Index", "Home")</p>
+    </div>
+  </nav>
+</div>
+<br />
+<div class="container">
+    @using (Html.BeginForm())
+  {
+    @Html.HiddenFor(model => model.EngineerId)
+    
+    @Html.Label("Add new flavor assignment  ")
+    @Html.DropDownList("FlavorId")
+    <br/>
+    <button type="Save">Add flavor Assignment</button>
+  }
+</div>

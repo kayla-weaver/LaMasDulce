@@ -1,16 +1,33 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+using Microsoft.AspCore.Builder;
+using Microsft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using LaMasDulce.Models;
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-  </PropertyGroup>
+namespace LaMasDulce
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddDbContext<LaMasDulce>(
+                            dbContextOptions => dbContextOptions
+                            .UseMySql(
+                                builder.Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(builder.Configuration["ConnectionStrings:DefaultConnection"]
+                                )
+                            )
+            );
+WebApplication app = builder.Build();
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.0">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.0" />
-  </ItemGroup>
+app.UseHttpsRedirection();
+app.UseStaticFiles();
 
-</Project>
+app.UseRouting();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.Run();
+        }
+    }
+}
