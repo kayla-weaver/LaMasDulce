@@ -1,0 +1,27 @@
+@{
+  Layout = "_Layout";
+}
+
+@using LaMasDulce.Models;
+@model List<LaMasDulce.Models.Flavor>;
+
+<h1>Flavors</h1>
+
+<hr />
+
+@if (@Model.Count == 0)
+{
+  <h3>there are no flavors</h3>
+}  
+
+<ul>
+  @foreach(Flavor flavor in Model)
+  {
+    <li>@Html.ActionLink($"{flavor.FlavorName}", "Details", new { id = flavor.FlavorId })</li>
+  }
+</ul>
+
+<ul class="menu-links">
+  <li>@Html.ActionLink("add new flavor", "Create")</li>
+  <li>@Html.ActionLink("back to home", "Index", "Home")</li>
+</ul>

@@ -1,0 +1,30 @@
+@{
+  Layout = "_Layout";
+}
+
+@model LaMasDulce.Models.Flavor
+
+<h2>edit flavor details</h2>
+
+<hr />
+<h4>@Html.DisplayFor(model => model.FlavorName)</h4>
+<br>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.FlavorId)
+  @Html.Label("Name")
+  @Html.EditorFor(model => model.FlavorName, new { @class = "form-control"})
+
+
+  @Html.Label("Qualified treat")
+  @Html.DropDownList("TreatId")
+
+  <br>
+  <br>
+  <input type="submit" value="Save Changes" required="true" />
+}
+
+<ul class="menu-links">
+  <li>@Html.ActionLink("back to flavor inventory", "Index")</li>
+</ul>

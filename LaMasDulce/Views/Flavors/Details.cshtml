@@ -1,0 +1,37 @@
+@{
+  Layout = "_Layout";
+}
+
+@model LaMasDulce.Models.Flavor
+
+<h2>flavor details</h2>
+
+<hr />
+
+<h3>@Html.DisplayFor(model => model.FlavorName)</h3>
+
+
+<h4>treats qualified to service this flavor:</h4>
+@if(@Model.JoinEntities.Count == 0)
+{
+  <p>this flavor does not have any treats assigned to it</p>
+}
+<ul>
+  @foreach (var join in Model.JoinEntities)
+  {
+    <li>@Html.ActionLink($"{join.Treat.Name}", "Details", "Treats", new {id = join.Treat.TreatId})</li>
+    @using (Html.BeginForm("DeleteTreat", "Machines"))
+    {
+      @Html.Hidden("joinId", @join.TreatFlavorId)
+      <input type="submit" value="remove" />
+    }
+  }
+</ul>
+
+
+<ul class="menu-links">
+  <li>@Html.ActionLink("edit flavor", "Edit", new { id = Model.FlavorId })</li>
+  <li>@Html.ActionLink("delete this flavor", "Delete", new { id = Model.FlavorId })</li>
+  <li>@Html.ActionLink("add a treat to this flavor", "AddTreat", new {id = Model.FlavorId })</li>
+  <li>@Html.ActionLink("back to flavor inventory", "Index")</li>
+</ul>
