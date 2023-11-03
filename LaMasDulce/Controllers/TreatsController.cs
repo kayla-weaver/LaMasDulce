@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LaMasDulce.Controllers
 {
-  public class TreatsController : Controllers
+  public class TreatsController : Controller
   {
     private readonly LaMasDulceContext _db;
     public TreatsController(LaMasDulceContext db)
