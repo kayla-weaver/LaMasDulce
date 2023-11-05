@@ -64,14 +64,7 @@ public ActionResult Edit(int id)
       return RedirectToAction("Details", new { id = treat.TreatId });
     }
 
-    [HttpPost]
-
-    public ActionResult Edit(Treat treat)
-    {
-      _db.Entry(treat).State = EntityState.Modified;
-      _db.SaveChanges();
-      return RedirectToAction("Details", new { id = treat.TreatId });
-    }
+  
 
     [HttpPost]
 
