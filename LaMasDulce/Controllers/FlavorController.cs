@@ -15,7 +15,7 @@ namespace LaMasDulce.Controllers
   {
     private readonly LaMasDulceContext _db;
 
-    public LaMasDulceController(LaMasDulceContext db)
+    public FlavorsController(LaMasDulceContext db)
     {
       _db = db;
     }
