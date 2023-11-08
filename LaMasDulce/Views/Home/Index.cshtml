@@ -7,26 +7,8 @@
 <h1 class = "title">La Mas Dulce </h1>
 
 <h3>Treats Deliciosos</h3>
-@if (@ViewBag.TreatDirectory.Count == 0)
-{
-    <h4>Que Malo!! No hay :(</h4>
-}
-@foreach(Treat treat in @ViewBag.TreatDirectory)
-{
-    <li>@treat.Name</li>
-}
 
-<h3> Flavors Sabrosas </h3>
-@if (ViewBag.FlavorInventory.Count == 0)
-{
-    <h4>Sin sabores :( </h4>
-}
-@foreach(Flavor flavor in @ViewBag.FlavorInventory)
-{
-    <li>@flavor.FlavorName</li>
-}
+<li>@Html.ActionLink("see Treat directory", "Index", "Treats")</li>
 
-  <li>@Html.ActionLink("see Treat directory", "Index", "Treats")</li>
-
-    <li>@Html.ActionLink("see Flavor inventory", "Index", "Flavors")</li>
+<li>@Html.ActionLink("see Flavor inventory", "Index", "Flavors")</li>
 

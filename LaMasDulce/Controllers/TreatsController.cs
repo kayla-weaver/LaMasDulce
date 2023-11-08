@@ -1,12 +1,17 @@
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using LaMasDulce.Models;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace LaMasDulce.Controllers
 {
+  [Authorize]
   public class TreatsController : Controller
   {
     private readonly LaMasDulceContext _db;
@@ -64,19 +69,25 @@ public ActionResult Edit(int id)
       return RedirectToAction("Details", new { id = treat.TreatId });
     }
 
+public ActionResult AddFlavor(int treatId)
+{
+  Treat treat = _db.Treats.FirstOrDefault(treat => treat.TreatId == treatId);
+  ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "FlavorName");
+  return View(treat);
+}
   
 
     [HttpPost]
 
     public ActionResult AddFlavor(Treat treat, int FlavorId)
     {
-      if (FlavorId != 0)
+      TreatFlavor? joinEntity = _db.TreatFlavor.FirstOrDefault(join => (join.FlavorId == FlavorId && join.TreatId == treat.TreatId));
+      if (FlavorId !=0)
       {
-        if (_db.TreatFlavor.Any(join => join.FlavorId == FlavorId && join.TreatId == treat.TreatId) == false)
-          _db.TreatFlavor.Add(new TreatFlavor() { FlavorId = FlavorId, TreatId = treat.TreatId });
+        _db.TreatFlavor.Add(new TreatFlavor() { FlavorId = FlavorId, TreatId = treat.TreatId });
+        _db.SaveChanges();
       }
-      _db.SaveChanges();
-      return RedirectToAction("Details", new { id = treat.TreatId });
+      return RedirectToAction("Details", new{id = treat.TreatId });
     }
 
     public ActionResult Delete(int id)

@@ -27,6 +27,7 @@ namespace LaMasDulce.Controllers
     }
     public ActionResult Create()
     {
+      ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "TreatName");
       return View();
     }
 
