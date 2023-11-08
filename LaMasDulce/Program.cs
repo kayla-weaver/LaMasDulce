@@ -1,5 +1,5 @@
-using Microsoft.AspCore.Builder;
-using Microsft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using LaMasDulce.Models;
 
@@ -10,7 +10,7 @@ namespace LaMasDulce
         static void Main(string[] args)
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-            builder.Services.AddDbContext<LaMasDulce>(
+            builder.Services.AddDbContext<LaMasDulceContext>(
                             dbContextOptions => dbContextOptions
                             .UseMySql(
                                 builder.Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(builder.Configuration["ConnectionStrings:DefaultConnection"]

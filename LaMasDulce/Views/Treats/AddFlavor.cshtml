@@ -19,7 +19,7 @@
 <div class="container">
     @using (Html.BeginForm())
   {
-    @Html.HiddenFor(model => model.EngineerId)
+    @Html.HiddenFor(model => model.TreatId)
     
     @Html.Label("Add new flavor assignment  ")
     @Html.DropDownList("FlavorId")

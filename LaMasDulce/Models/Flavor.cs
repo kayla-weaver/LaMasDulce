@@ -9,7 +9,7 @@ namespace LaMasDulce.Models
     }
     public int FlavorId { get; set; }
     public string FlavorName { get; set; }
-    public list<Treat> Treats { get; set; }
+    public List<Treat> Treats { get; set; }
 
     public string Name { get; }
     

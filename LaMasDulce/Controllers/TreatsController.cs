@@ -98,7 +98,7 @@ public ActionResult Edit(int id)
     public ActionResult DeleteFlavor(int joinId)
     {
       var joinEntry = _db.TreatFlavor.FirstOrDefault(entry => entry.TreatFlavorId == joinId);
-      _db.TreatFlavors.Remove(joinEntry);
+      _db.TreatFlavor.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Details", new { id = joinEntry.TreatId });
     }
